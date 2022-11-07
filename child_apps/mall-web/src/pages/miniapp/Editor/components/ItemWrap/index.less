@@ -1,0 +1,61 @@
+@import '~@/utils/utils.less';
+
+.active {
+  &::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    box-sizing: border-box;
+    border: 2px dashed #1b6ad1;
+    content: '';
+  }
+}
+
+.item_wrap {
+  position: relative;
+  overflow: hidden;
+  cursor: move;
+
+  &:hover {
+    .active;
+
+    .ctrl_wrap {
+      display: flex;
+    }
+  }
+
+  &.active {
+    .ctrl_wrap {
+      display: flex !important;
+    }
+  }
+
+  // 操作
+  .ctrl_wrap {
+    position: absolute;
+    top: 5px;
+    right: 2px;
+    z-index: 2;
+    display: none;
+    .flexCenter;
+
+    @iconSize: 16px;
+
+    .ctrl_btn {
+      .flexCenter;
+      .flexJCenter;
+      width: @iconSize;
+      height: @iconSize;
+      margin: 0 3px;
+      background-color: #fff;
+      border-radius: 50%;
+      cursor: pointer !important;
+
+      .btn_icon {
+        font-size: @iconSize;
+      }
+    }
+  }
+}

@@ -1,0 +1,32 @@
+@import '~@/utils/utils.less';
+
+.imgPanel {
+  position: relative;
+  margin: 10px auto;
+  padding: 10px;
+  border: 1px solid #c7c7c7;
+
+  .order_btn {
+    .flexCenter;
+    .flexJCenter;
+    position: absolute;
+    right: 0;
+    width: 38px;
+    height: 38px;
+    background-color: #f0f6ff;
+    cursor: pointer;
+    transition: all 0.2s ease-in;
+
+    &:hover {
+      background-color: #d3e6ff;
+    }
+  }
+
+  .order_btn_up {
+    top: 0;
+  }
+
+  .order_btn_down {
+    bottom: 0;
+  }
+}

@@ -1,0 +1,46 @@
+@import '~@/utils/utils.less';
+
+.cube_wrap {
+  .flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+
+  .item_wrap {
+    overflow: hidden;
+
+    .item {
+      margin: 5px;
+
+      .img_box {
+        position: relative;
+        overflow: hidden;
+
+        .img {
+          width: 100%;
+          height: 100%;
+        }
+
+        .play_icon {
+          width: 30px;
+          height: 30px;
+          .positionCenter;
+        }
+      }
+
+      .title {
+        margin: 5px 0 3px;
+        font-weight: 500;
+        .textOmit;
+      }
+
+      .desc {
+        margin-bottom: 5px;
+        font-size: 12px;
+      }
+    }
+  }
+}
+
+// 属性面板
+.panel {
+}

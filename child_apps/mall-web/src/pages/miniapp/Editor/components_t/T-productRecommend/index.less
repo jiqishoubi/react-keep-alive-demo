@@ -1,0 +1,138 @@
+@import '~@/utils/utils.less';
+
+@imgBoxWidth: 120px;
+
+.bottomBorder {
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.cube_wrap {
+  overflow: hidden;
+  background-color: #fff;
+
+  .title_wrap {
+    .flex;
+    align-items: baseline;
+    padding: 10px 0 0 0;
+
+    .title {
+      font-weight: 500;
+      font-size: 13px;
+    }
+
+    .desc {
+      margin-left: 10px;
+      color: #8c8c8c;
+      font-size: 11px;
+    }
+  }
+
+  .item_wrap {
+    //元素
+    .item {
+      .flex;
+      box-sizing: border-box;
+      overflow: hidden;
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      .img_box {
+        width: @imgBoxWidth;
+        height: @imgBoxWidth;
+        margin-right: 15px;
+        overflow: hidden;
+        font-size: 0;
+
+        .img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+      @leftWidth: @imgBoxWidth+6px;
+
+      .img_content {
+        .flex;
+        flex-direction: column;
+        // justify-content: space-between;
+        width: calc(100% - @leftWidth);
+        height: @imgBoxWidth;
+        div {
+          width: 100%;
+        }
+
+        .img_title {
+          display: -webkit-box;
+          //margin-bottom: 4px;
+          //word-break: break-all;
+          //word-wrap: break-word;
+          //overflow: hidden;
+          //white-space: nowrap;
+          //text-overflow: ellipsis;
+          overflow: hidden;
+          font-weight: 500;
+          font-size: 13px;
+          text-overflow: ellipsis;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 2;
+
+          img {
+            position: relative;
+            top: 5px;
+            float: left; //实现文字环绕
+          }
+        }
+
+        .img_desc {
+          display: -webkit-box;
+          overflow: hidden;
+          color: #8c8c8c;
+          font-size: 11px;
+          text-overflow: ellipsis;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 3;
+        }
+
+        .price_wrap {
+          .flexCenter;
+          .flexBetween;
+          align-items: flex-end;
+          .price {
+            display: flex;
+            align-items: flex-end;
+            .price_1 {
+              color: #ff5500;
+              font-weight: 500;
+              font-size: 11px;
+            }
+            .priceType {
+              margin-left: 5px;
+              color: #8c8c8c;
+              font-size: 4px;
+              text-decoration: line-through;
+            }
+          }
+
+          .price_btn {
+            .flexCenter;
+            .flexJCenter;
+            width: 95px;
+            height: 21px;
+            color: #fff;
+            font-size: 10px;
+            background-color: #ff5500;
+            border-radius: 11px;
+            transform: scale(0.9);
+            transform-origin: center center;
+          }
+        }
+      }
+    }
+  }
+}
+
+// 属性面板
+.panel {
+}

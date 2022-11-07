@@ -1,0 +1,21 @@
+@import url('~@/common/styles.less');
+
+.ImgUpload_1638518131492 {
+  display: inline-block;
+
+  &.disabled {
+    .el-upload.el-upload--picture-card {
+      display: none !important;
+    }
+  }
+
+  .el-upload-list__item {
+    display: block;
+  }
+
+  // 模态
+  .el-dialog.el-dialog--center {
+    .positionCenter;
+    margin: 0 !important;
+  }
+}

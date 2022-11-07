@@ -1,0 +1,39 @@
+@import url('~@/config/theme.less');
+
+#side_menu_wrap_id {
+  background-color: @sideMenuBgColor;
+
+  .side_menu {
+    background-color: @sideMenuBgColor;
+
+    .el-menu {
+      background-color: @sideMenuBgColor;
+    }
+
+    // hover active
+    .hoverBgColor {
+      background-color: fade(#fff, 10);
+    }
+    .activeBgColor {
+      background-color: fade(#fff, 20);
+    }
+
+    .el-sub-menu__title {
+      color: fade(#fff, 90);
+    }
+    .el-sub-menu__title:hover {
+      .hoverBgColor;
+    }
+
+    .el-menu-item {
+      color: fade(#fff, 90);
+      min-width: 0 !important;
+    }
+    .el-menu-item:hover {
+      .hoverBgColor;
+    }
+    .el-menu-item.is-active {
+      .activeBgColor;
+    }
+  }
+}

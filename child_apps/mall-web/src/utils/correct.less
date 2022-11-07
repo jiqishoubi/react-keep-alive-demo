@@ -1,0 +1,227 @@
+// 修正 样式 less
+@import '../../config/theme/defaultTheme.less';
+
+//多tab
+#istabs_tabs_wrap {
+  & > .ant-tabs-nav {
+    &::before {
+      border-bottom: none !important;
+    }
+
+    // button
+    button.ant-tabs-tab {
+      padding-right: 13px;
+      padding-left: 13px;
+      font-weight: normal;
+
+      //关闭符号
+      .ant-tabs-tab-remove {
+        .anticon.anticon-close {
+          position: relative;
+          top: 2px;
+        }
+      }
+    }
+  }
+}
+
+// 左侧sider
+aside {
+  .ant-layout-sider-children {
+    ul.ant-menu.ant-pro-sider-menu {
+      div,
+      li,
+      span,
+      a {
+        user-select: none;
+      }
+    }
+  }
+}
+
+//上面GlobalHeader的样式
+.ant-pro-global-header {
+  background-color: @t-globalHeader-backgourndColor !important;
+
+  ul.ant-menu.ant-menu-root {
+    background-color: @t-globalHeader-backgourndColor !important;
+  }
+}
+//09.22左侧sider 样式 修改
+.ant-menu-item.ant-menu-item-only-child {
+  a {
+    color: #636363;
+  }
+}
+.ant-menu-item.ant-menu-item-only-child.ant-menu-item-selected {
+  background-color: rgba(53, 143, 255, 0.2);
+  a {
+    color: #358fff;
+  }
+}
+.ant-menu-dark.ant-menu-dark:not(.ant-menu-horizontal) .ant-menu-item-selected {
+  background-color: rgba(53, 143, 255, 0.2);
+}
+
+//一级导航设置
+.ant-menu-submenu-title {
+  color: #636363;
+  font-size: 14px;
+}
+//导航被点击
+.ant-menu-submenu .ant-menu-submenu-inline.ant-menu-item-active.ant-menu-submenu-active .ant-menu-submenu-selected {
+  background-color: rgba(53, 143, 255, 0.2);
+}
+
+//导航被触摸
+.ant-menu-item.ant-menu-item-only-child.ant-menu-item-active {
+  background-color: rgba(53, 143, 255, 0.2);
+}
+//导航被触摸
+.ant-menu-submenu.ant-menu-submenu-inline.ant-menu-submenu-active {
+  background-color: rgba(53, 143, 255, 0.2);
+}
+
+//table表头
+
+body {
+  :global {
+    .ant-table-thead > tr > th {
+      .ant-table-cell .datumsShow {
+        background: red;
+      }
+      color: #262626;
+      font-size: 14px;
+
+      background: #f0f0f0;
+    }
+  }
+}
+
+//table 行变化
+.root {
+  .oddRow {
+    background-color: red;
+  }
+  .evenRow {
+    background-color: #f6faffff;
+  }
+}
+
+//.ant-table-row .ant-table-row-level-0 .antd-pro-utils-correct-evenRow>td{
+//  color:#262626
+//}
+.ant-table-cell {
+  color: #262626;
+}
+//页面背景色
+.ant-layout {
+  background-color: #f0f0f0;
+}
+
+//页脚背景色
+.ant-layout-footer {
+  background-color: #f0f0f0;
+}
+//table行设置
+.antd-pro-utils-correct-evenRow {
+  color: #262626;
+  font-size: 12px;
+  background-color: #f6faff;
+}
+
+.antd-pro-utils-correct-oddRow {
+  color: #262626;
+  font-size: 12px;
+}
+
+//一级标题图标（右）
+.ant-menu-dark .ant-menu-item-active > .ant-menu-submenu-title > .ant-menu-submenu-arrow::after,
+.ant-menu-dark .ant-menu-submenu-active > .ant-menu-submenu-title > .ant-menu-submenu-arrow::after,
+.ant-menu-dark .ant-menu-submenu-open > .ant-menu-submenu-title > .ant-menu-submenu-arrow::after,
+.ant-menu-dark .ant-menu-submenu-selected > .ant-menu-submenu-title > .ant-menu-submenu-arrow::after,
+.ant-menu-dark .ant-menu-submenu-title:hover > .ant-menu-submenu-title > .ant-menu-submenu-arrow::after,
+.ant-menu-dark .ant-menu-item:hover > .ant-menu-submenu-title:hover > .ant-menu-submenu-arrow::after,
+.ant-menu-dark .ant-menu-item-active > .ant-menu-submenu-title:hover > .ant-menu-submenu-arrow::after,
+.ant-menu-dark .ant-menu-submenu-active > .ant-menu-submenu-title:hover > .ant-menu-submenu-arrow::after,
+.ant-menu-dark .ant-menu-submenu-open > .ant-menu-submenu-title:hover > .ant-menu-submenu-arrow::after,
+.ant-menu-dark .ant-menu-submenu-selected > .ant-menu-submenu-title:hover > .ant-menu-submenu-arrow::after,
+.ant-menu-dark .ant-menu-submenu-title:hover > .ant-menu-submenu-title:hover > .ant-menu-submenu-arrow::after,
+.ant-menu-dark .ant-menu-item:hover > .ant-menu-submenu-title > .ant-menu-submenu-arrow::before,
+.ant-menu-dark .ant-menu-item-active > .ant-menu-submenu-title > .ant-menu-submenu-arrow::before,
+.ant-menu-dark .ant-menu-submenu-active > .ant-menu-submenu-title > .ant-menu-submenu-arrow::before,
+.ant-menu-dark .ant-menu-submenu-open > .ant-menu-submenu-title > .ant-menu-submenu-arrow::before,
+.ant-menu-dark .ant-menu-submenu-selected > .ant-menu-submenu-title > .ant-menu-submenu-arrow::before,
+.ant-menu-dark .ant-menu-submenu-title:hover > .ant-menu-submenu-title > .ant-menu-submenu-arrow::before,
+.ant-menu-dark .ant-menu-item:hover > .ant-menu-submenu-title:hover > .ant-menu-submenu-arrow::before,
+.ant-menu-dark .ant-menu-item-active > .ant-menu-submenu-title:hover > .ant-menu-submenu-arrow::before,
+.ant-menu-dark .ant-menu-submenu-active > .ant-menu-submenu-title:hover > .ant-menu-submenu-arrow::before,
+.ant-menu-dark .ant-menu-submenu-open > .ant-menu-submenu-title:hover > .ant-menu-submenu-arrow::before,
+.ant-menu-dark .ant-menu-submenu-selected > .ant-menu-submenu-title:hover > .ant-menu-submenu-arrow::before,
+.ant-menu-dark .ant-menu-submenu-title:hover > .ant-menu-submenu-title:hover > .ant-menu-submenu-arrow::before {
+  background-color: rgba(53, 143, 255, 0.2);
+}
+//一级标题图标
+.ant-menu.ant-menu-dark .ant-menu-submenu-title .ant-menu-submenu-arrow::after,
+.ant-menu-dark .ant-menu-sub .ant-menu-submenu-title .ant-menu-submenu-arrow::after,
+.ant-menu.ant-menu-dark .ant-menu-sub .ant-menu-submenu-title .ant-menu-submenu-arrow::after,
+.ant-menu.ant-menu-dark .ant-menu-submenu-title .ant-menu-submenu-arrow::before,
+.ant-menu-dark .ant-menu-sub .ant-menu-submenu-title .ant-menu-submenu-arrow::before,
+.ant-menu.ant-menu-dark .ant-menu-sub .ant-menu-submenu-title .ant-menu-submenu-arrow::before {
+  background: #636363;
+}
+
+//一级标题被点击
+.ant-menu-submenu-open {
+  .ant-menu-submenu-title {
+    font-weight: bold;
+    > span > span > svg {
+      color: #358fff;
+    }
+  }
+}
+.ant-select-arrow {
+  color: #358fff;
+}
+//订单详情表头颜色
+th.datumsShow {
+  background-color: white !important;
+}
+
+//禁用input样式
+.ant-input-borderless.ant-input-borderless[disabled] {
+  color: rgba(0, 0, 0, 0.85);
+}
+//上传隐藏
+.ant-upload-disabled.ant-upload.ant-upload-select-picture-card {
+  display: none;
+}
+
+.ant-breadcrumb {
+  position: absolute;
+  top: -50px;
+  left: 20px;
+  margin-left: 20px;
+  // z-index: 1000000;
+}
+//.ant-menu-item.ant-menu-item-only-child a::after{
+//  background: #00a0e9;
+//}
+
+//
+//
+//
+//.ant-tabs-tabpane.ant-tabs-tabpane-active{}
+
+.ant-tabs-content.ant-tabs-content-top {
+  .ant-tabs-tabpane .ant-tabs-tabpane-active {
+    antd-pro-layouts-tabs-layout-paneCard {
+      margin-top: 0;
+      background: red;
+    }
+  }
+}
+
+.ant-menu-dark .ant-menu-inline.ant-menu-sub  {
+  background: #ffffff;
+}

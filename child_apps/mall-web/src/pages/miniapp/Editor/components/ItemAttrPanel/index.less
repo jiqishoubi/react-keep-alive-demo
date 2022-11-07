@@ -1,0 +1,27 @@
+@import '~@/utils/utils.less';
+@import '../../../../../../config/theme/defaultTheme.less';
+
+@wrapMargin: 20px;
+
+.attr_wrap {
+  flex: 1 0 0;
+  // max-width: 700px;
+  max-width: 900px;
+  height: calc(100vh - @layout-header-height);
+  margin-left: 35px;
+  overflow-y: auto;
+}
+
+.attr_wrap_content {
+  margin: @wrapMargin;
+  padding: 10px;
+  background-color: #fff;
+
+  .panel_title {
+    // padding: 5px 10px;
+    padding: 5px 0;
+    overflow: hidden;
+    font-weight: bold;
+    border-radius: 6px;
+  }
+}

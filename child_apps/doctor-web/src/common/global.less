@@ -1,0 +1,85 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  // height: 100vh;
+  font-size: 14px;
+}
+
+body {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 14px;
+  color: #303133;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+/* 全局样式修正全局样式修正全局样式修正全局样式修正全局样式修正全局样式修正全局样式修正全局样式修正全局样式修正全局样式修正全局样式修正全局样式修正全局样式修正 */
+
+// select
+.el-select {
+  flex: 1 0 0;
+}
+
+// table
+// table fixed的地方背景颜色
+.my_pro_table {
+  .el-table__fixed-right {
+    background-color: #fff;
+  }
+}
+
+// modal
+// 居中的modal太靠下了 margintop太大了 重置
+.el-dialog.el-dialog--center {
+  margin-top: 8vh !important;
+}
+
+// time picker的 取消 确定 . 隐藏
+.el-time-panel {
+  .el-time-panel__footer {
+    display: none;
+  }
+}
+
+// drawer
+.el-drawer {
+  background-color: #fff;
+  &.rtl.open {
+    .el-drawer__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-sizing: border-box;
+      margin-bottom: 0;
+      padding: 0 20px !important;
+      height: 60px;
+    }
+    .el-drawer__body {
+      height: calc(100vh - 60px);
+      overflow-y: auto;
+    }
+  }
+}
+
+// img upload 的图片 大小
+.el-upload--picture-card {
+  --el-upload-picture-card-size: 120px !important;
+}
+.el-upload-list--picture-card {
+  --el-upload-list-picture-card-size: 120px !important;
+}
+
+// 针对micro-app
+// 成立日期 date-picker 的样式问题
+.el-input--prefix .el-input__inner {
+  padding-left: calc(5px + 14px + 12px) !important;
+}

@@ -1,0 +1,13 @@
+/.husky
+/node_modules
+/dist
+/doctor
+
+*_bak.*
+
+*.min.js
+*.min.css
+
+# tinymce
+/src/components/htmlEditor/tinymce
+/public/tinymce

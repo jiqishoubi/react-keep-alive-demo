@@ -1,0 +1,132 @@
+{
+  "name": "react-pro",
+  "version": "4.0.0",
+  "private": true,
+  "description": "An out-of-box UI solution for enterprise applications",
+  "scripts": {
+    "analyze": "cross-env ANALYZE=1 umi build",
+    "build": "umi build",
+    "dev": "npm run start:dev",
+    "start": "cross-env REACT_APP_ENV=dev MOCK=none PORT=9033 UMI_UI=none umi dev",
+    "start:mock": "cross-env REACT_APP_ENV=mock PORT=9033 UMI_UI=none umi dev",
+    "start:pre": "cross-env REACT_APP_ENV=pre MOCK=none PORT=9033 UMI_UI=none umi dev",
+    "postinstall": "patch-package",
+    "prepare": "husky install",
+    "prettier-all": "prettier --write '**/*.{js,jsx,ts,tsx,vue,css,less,scss,md,json}'"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 10"
+  ],
+  "dependencies": {
+    "@ant-design/icons": "^4.2.1",
+    "@ant-design/pro-form": "^1.15.3",
+    "@ant-design/pro-layout": "5.0.17",
+    "@ant-design/pro-table": "^2.28.0",
+    "@antv/data-set": "0.11.0",
+    "@wangeditor/editor": "^5.1.0",
+    "@wangeditor/editor-for-react": "^1.0.3",
+    "ahooks": "^3.7.0",
+    "antd": "^4.22.0",
+    "antd-draggable-modal": "^0.1.7",
+    "antd-img-crop": "^3.14.1",
+    "array-move": "^2.2.2",
+    "bignumber.js": "^9.0.1",
+    "classnames": "^2.2.6",
+    "clipboard": "^2.0.6",
+    "dva": "^2.6.0-beta.16",
+    "echarts": "^5.0.1",
+    "js-base64": "^2.5.2",
+    "lodash": "^4.17.11",
+    "md5": "^2.2.1",
+    "mobx": "^6.6.1",
+    "mobx-react": "^7.5.2",
+    "moment": "^2.24.0",
+    "omit.js": "^1.0.2",
+    "patch-package": "^6.2.2",
+    "path-to-regexp": "2.4.0",
+    "prop-types": "^15.7.2",
+    "qrcode.react": "^3.0.1",
+    "qs": "^6.9.4",
+    "query-string": "^7.1.1",
+    "react": "^16.13.1",
+    "react-activation": "0.9.12",
+    "react-color": "^2.18.1",
+    "react-copy-to-clipboard": "^5.0.1",
+    "react-dnd": "^7.4.5",
+    "react-dnd-html5-backend": "^7.4.4",
+    "react-dom": "^16.13.1",
+    "react-helmet": "^5.2.1",
+    "react-pdf": "^5.0.0",
+    "react-sortable-hoc": "^1.11.0",
+    "react-sublime-video": "^0.2.5",
+    "redux": "^4.0.1",
+    "umi": "^2.13.0",
+    "umi-plugin-antd-icon-config": "^1.0.2",
+    "umi-plugin-antd-theme": "1.2.0-0",
+    "umi-plugin-pro-block": "^1.3.2",
+    "umi-plugin-react": "^1.14.10",
+    "umi-request": "^1.0.8",
+    "use-merge-value": "^1.0.1",
+    "xss": "^1.0.9"
+  },
+  "devDependencies": {
+    "@ant-design/pro-card": "^1.10.1",
+    "@ant-design/pro-cli": "^1.0.18",
+    "@types/classnames": "^2.2.7",
+    "@types/express": "^4.17.0",
+    "@types/history": "^4.7.2",
+    "@types/lodash": "^4.14.144",
+    "@types/qs": "^6.5.3",
+    "@types/react": "^16.9.17",
+    "@types/react-dom": "^16.8.4",
+    "@types/react-helmet": "^5.0.13",
+    "@umijs/fabric": "2.1.0",
+    "@umijs/preset-ui": "^2.2.8",
+    "chalk": "^3.0.0",
+    "cross-env": "^7.0.0",
+    "cross-port-killer": "^1.1.1",
+    "enzyme": "^3.11.0",
+    "express": "^4.17.1",
+    "husky": "^7.0.4",
+    "jsdom-global": "^3.0.2",
+    "lint-staged": "^10.5.4",
+    "mockjs": "^1.0.1-beta3",
+    "node-fetch": "^2.6.0",
+    "prettier": "^2.7.1",
+    "pro-download": "1.0.1",
+    "serverless-http": "^2.0.2",
+    "stylelint": "^13.0.0",
+    "umi-plugin-ga": "^1.1.3",
+    "umi-plugin-pro": "^1.0.3",
+    "umi-types": "^0.5.9"
+  },
+  "engines": {
+    "node": ">=10.0.0"
+  },
+  "checkFiles": [
+    "src/**/*.js*",
+    "src/**/*.ts*",
+    "src/**/*.less",
+    "config/**/*.js*",
+    "scripts/**/*.js"
+  ],
+  "create-umi": {
+    "ignoreScript": [
+      "functions*",
+      "generateMock"
+    ],
+    "ignoreDependencies": [
+      "serverless"
+    ],
+    "ignore": [
+      ".git",
+      "README.*.md",
+      "create-umi"
+    ]
+  },
+  "lint-staged": {
+    "**/*.{js,jsx,ts,tsx,vue,css,less,scss,md,json}": "prettier --write"
+  }
+}

@@ -1,0 +1,32 @@
+/// vue--config
+{
+  "env": {
+    "node": true,
+    "browser": true,
+    "es2021": true
+  },
+  "parser": "vue-eslint-parser", // vue解析器
+  "parserOptions": {
+    "sourceType": "module", // Allows for the use of imports
+    "ecmaVersion": 2021,
+    "ecmaFeatures": {
+      "jsx": true // enable JSX
+    },
+    "requireConfigFile": false
+  },
+  "plugins": ["react"],
+  // 规则
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended" // 解决react Button is defined but never used // 因为vue有的地方也是用了jsx语法 ，所以安装了eslint-plugin-react
+  ],
+  // 自己的规则
+  "rules": {
+    // common
+    "no-unreachable": 1, // return 下面的代码会warning
+    "no-async-promise-executor": 1, // promise里不能async
+    // react用在vue的规则
+    "react/react-in-jsx-scope": 0, // jsx中必须引入react，因为在webpack中配置了，所以关闭
+    "react/no-string-refs":0 // 不能用string的ref，但是在vue中写jsx需要支持
+  }
+}

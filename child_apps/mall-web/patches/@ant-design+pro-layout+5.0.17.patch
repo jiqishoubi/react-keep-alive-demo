@@ -1,0 +1,391 @@
+diff --git a/node_modules/@ant-design/pro-layout/es/BasicLayout.js b/node_modules/@ant-design/pro-layout/es/BasicLayout.js
+index 20c1b1b..905033b 100644
+--- a/node_modules/@ant-design/pro-layout/es/BasicLayout.js
++++ b/node_modules/@ant-design/pro-layout/es/BasicLayout.js
+@@ -1,5 +1,6 @@
+ import "antd/es/layout/style";
+ import _Layout from "antd/es/layout";
++import defaultTheme from '../../../../config/theme/defaultTheme';
+ 
+ function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+ 
+@@ -74,12 +75,17 @@ var footerRender = function footerRender(props) {
+ var renderSiderMenu = function renderSiderMenu(props) {
+   var layout = props.layout,
+       isMobile = props.isMobile,
+-      menuRender = props.menuRender;
++      menuRender = props.menuRender,
++      menuData = props.menuData;
+ 
+   if (props.menuRender === false || props.pure) {
+     return null;
+   }
+ 
++  if (layout === 'mixmenu' && menuData.length == 0) {
++    return null
++  }
++
+   if (layout === 'topmenu' && !isMobile) {
+     return React.createElement(SiderMenu, Object.assign({}, props, {
+       hide: true
+@@ -122,7 +128,11 @@ var defaultPageTitleRender = function defaultPageTitleRender(pageProps, props) {
+ 
+ var getPaddingLeft = function getPaddingLeft(hasLeftPadding, collapsed, siderWidth) {
+   if (hasLeftPadding) {
+-    return collapsed ? 80 : siderWidth;
++    return collapsed ? (
++      defaultTheme['menu-collapsed-width']
++        ? Number(defaultTheme['menu-collapsed-width'].split('px')[0])
++        : 80
++    ) : siderWidth;
+   }
+ 
+   return undefined;
+@@ -339,10 +349,13 @@ var BasicLayout = function BasicLayout(props) {
+   }, siderMenuDom, React.createElement(_Layout, {
+     style: genLayoutStyle
+   }, headerDom, React.createElement(WrapContent, Object.assign({
+-    isChildrenLayout: isChildrenLayout
++    isChildrenLayout: isChildrenLayout,
+   }, rest, {
+     className: contentClassName,
+-    style: contentStyle
++    style: {
++      paddingTop: PropsLayout == 'mixmenu' ? 40 : null,
++      ...contentStyle
++    }
+   }), loading ? React.createElement(PageLoading, null) : children), footerDom)))));
+ };
+ 
+diff --git a/node_modules/@ant-design/pro-layout/es/BasicLayout.less b/node_modules/@ant-design/pro-layout/es/BasicLayout.less
+index ae910f6..e3f4312 100644
+--- a/node_modules/@ant-design/pro-layout/es/BasicLayout.less
++++ b/node_modules/@ant-design/pro-layout/es/BasicLayout.less
+@@ -1,4 +1,5 @@
+ @import '~antd/es/style/themes/default.less';
++@import '../../../../config/theme//defaultTheme.less';
+ 
+ @basicLayout-prefix-cls: ~'@{ant-prefix}-pro-basicLayout';
+ 
+@@ -41,10 +42,10 @@
+ 
+   &-content {
+     position: relative;
+-    margin: 24px;
++    margin: @t-basicLayout-content-margin;
+     transition: all 0.2s;
+     .@{ant-prefix}-pro-page-header-wrap {
+-      margin: -24px -24px 0;
++      margin: -@t-basicLayout-content-margin -@t-basicLayout-content-margin 0;
+     }
+     &-disable-margin {
+       margin: 0;
+diff --git a/node_modules/@ant-design/pro-layout/es/GlobalHeader/index.js b/node_modules/@ant-design/pro-layout/es/GlobalHeader/index.js
+index e938dae..001569f 100644
+--- a/node_modules/@ant-design/pro-layout/es/GlobalHeader/index.js
++++ b/node_modules/@ant-design/pro-layout/es/GlobalHeader/index.js
+@@ -24,7 +24,7 @@ import './index.less';
+ import React, { Component } from 'react';
+ import classNames from 'classnames';
+ import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
+-import { defaultRenderLogo } from '../SiderMenu/SiderMenu';
++import { defaultRenderLogo, defaultRenderLogoAndTitle } from '../SiderMenu/SiderMenu';
+ import { isBrowser } from '../utils/utils';
+ 
+ var defaultRenderCollapsedButton = function defaultRenderCollapsedButton(collapsed) {
+@@ -101,7 +101,12 @@ var GlobalHeader = /*#__PURE__*/function (_Component) {
+           rightContentRender = _this$props3.rightContentRender,
+           menuHeaderRender = _this$props3.menuHeaderRender,
+           propClassName = _this$props3.className,
+-          style = _this$props3.style;
++          style = _this$props3.style,
++
++          layout = _this$props3.layout,
++          siderWidth = _this$props3.siderWidth,
++          mixMenuRender = _this$props3.mixMenuRender;
++
+       var className = classNames(propClassName, 'ant-pro-global-header');
+       var logoDom = React.createElement("span", {
+         className: "ant-pro-global-header-logo",
+@@ -110,11 +115,28 @@ var GlobalHeader = /*#__PURE__*/function (_Component) {
+       return React.createElement("div", {
+         className: className,
+         style: style
+-      }, isMobile && renderLogo(menuHeaderRender, logoDom), this.renderCollapsedButton(), React.createElement("div", {
++      }, isMobile && renderLogo(menuHeaderRender, logoDom), 
++      
++      //logo
++      layout == 'mixmenu' 
++        ? React.createElement("div", {
++          className: "ant-pro-sider-menu-logo",
++          id: "logo",
++          style: {
++            background: 'none',
++            width: siderWidth,
++          }
++        }, defaultRenderLogoAndTitle(_this$props3))
++        : null,
++      
++      //切换按钮
++      layout == 'mixmenu' ? null : this.renderCollapsedButton(), 
++
++      React.createElement("div", {
+         style: {
+           flex: 1
+         }
+-      }), rightContentRender && rightContentRender(this.props));
++      }, (layout == 'mixmenu' && mixMenuRender && mixMenuRender()) || null), rightContentRender && rightContentRender(this.props));
+     }
+   }]);
+ 
+diff --git a/node_modules/@ant-design/pro-layout/es/GlobalHeader/index.less b/node_modules/@ant-design/pro-layout/es/GlobalHeader/index.less
+index f493e3f..24bb6a5 100644
+--- a/node_modules/@ant-design/pro-layout/es/GlobalHeader/index.less
++++ b/node_modules/@ant-design/pro-layout/es/GlobalHeader/index.less
+@@ -13,6 +13,8 @@
+   padding: 0;
+   background: @pro-layout-header-bg;
+   box-shadow: @pro-layout-header-box-shadow;
++  //2020.07.31
++  overflow: hidden; 
+ 
+   &-logo {
+     display: inline-flex;
+@@ -41,13 +43,15 @@
+ 
+   &-trigger {
+     height: @layout-header-height;
+-    padding: 0 24px;
++    // padding: 0 24px;
++    padding: 0 14px;
+     font-size: 20px;
+     cursor: pointer;
+     transition: all 0.3s, padding 0s;
+-    &:hover {
+-      background: @pro-layout-header-hover-bg;
+-    }
++    // 2020.07.31 trigger hover不变色
++    // &:hover {
++    //   background: @pro-layout-header-hover-bg;
++    // }
+   }
+ 
+   .dark {
+diff --git a/node_modules/@ant-design/pro-layout/es/Header.js b/node_modules/@ant-design/pro-layout/es/Header.js
+index 9b0720c..a59b5d3 100644
+--- a/node_modules/@ant-design/pro-layout/es/Header.js
++++ b/node_modules/@ant-design/pro-layout/es/Header.js
+@@ -1,5 +1,6 @@
+ import "antd/es/layout/style";
+ import _Layout from "antd/es/layout";
++import defaultTheme from '../../../../config/theme/defaultTheme';
+ 
+ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+ 
+@@ -97,12 +98,23 @@ var HeaderView = /*#__PURE__*/function (_Component) {
+         return null;
+       }
+ 
+-      return React.createElement(React.Fragment, null, fixedHeader && React.createElement(Header, null), React.createElement(Header, {
++      let headerWidth = needSettingWidth ? "calc(100% - ".concat(collapsed ? (
++          defaultTheme['menu-collapsed-width']
++            ? Number(defaultTheme['menu-collapsed-width'].split('px')[0])
++            : 80
++        ) : siderWidth, "px)") : '100%'
++      if(layout == 'mixmenu'){
++        headerWidth= '100%'
++      }
++
++      return React.createElement(React.Fragment, null, 
++        layout == 'mixmenu' ? null : fixedHeader && React.createElement(Header, null), 
++        React.createElement(Header, {
+         style: Object.assign({
+           padding: 0,
+-          width: needSettingWidth ? "calc(100% - ".concat(collapsed ? 80 : siderWidth, "px)") : '100%',
++          width: headerWidth,
+           zIndex: 9,
+-          right: fixedHeader ? 0 : undefined
++          right: fixedHeader ? 0 : undefined,
+         }, style),
+         className: className
+       }, this.renderContent()));
+diff --git a/node_modules/@ant-design/pro-layout/es/SiderMenu/SiderMenu.js b/node_modules/@ant-design/pro-layout/es/SiderMenu/SiderMenu.js
+index 58588f6..222a234 100644
+--- a/node_modules/@ant-design/pro-layout/es/SiderMenu/SiderMenu.js
++++ b/node_modules/@ant-design/pro-layout/es/SiderMenu/SiderMenu.js
+@@ -7,7 +7,11 @@ import classNames from 'classnames';
+ import './index.less';
+ import BaseMenu from './BaseMenu';
+ import MenuCounter from './Counter';
++import defaultTheme from '../../../../../config/theme/defaultTheme';
++import { isBrowser } from '../utils/utils';
++
+ var Sider = _Layout.Sider;
++
+ export var defaultRenderLogo = function defaultRenderLogo(logo) {
+   if (typeof logo === 'string') {
+     return React.createElement("img", {
+@@ -58,16 +62,35 @@ var SiderMenu = function SiderMenu(props) {
+       breakpoint = _props$breakpoint === void 0 ? 'lg' : _props$breakpoint,
+       style = props.style,
+       links = props.links,
+-      onOpenChange = props.onOpenChange;
++      onOpenChange = props.onOpenChange,
++      layout = props.layout,
++      collapsedButtonRender = props.collapsedButtonRender;
+ 
+   var _MenuCounter$useConta = MenuCounter.useContainer(),
+       flatMenuKeys = _MenuCounter$useConta.flatMenuKeys;
+ 
+   var siderClassName = classNames('ant-pro-sider-menu-sider', {
+     'fix-sider-bar': fixSiderbar,
+-    light: theme === 'light'
++    light: theme === 'light',
++    'ant-pro-sider-menu-sider-mix': layout == 'mixmenu'
+   });
+   var headerDom = defaultRenderLogoAndTitle(props);
++
++  //切换
++  const triggerResizeEvent = function () {
++    if (isBrowser()) {
++      var event = document.createEvent('HTMLEvents');
++      event.initEvent('resize', true, false);
++      window.dispatchEvent(event);
++    }
++  };
++
++  const toggle = function () {
++    if (_onCollapse) _onCollapse(!collapsed);
++    triggerResizeEvent()
++  };
++  //切换 end
++
+   return React.createElement(Sider, {
+     collapsible: true,
+     trigger: null,
+@@ -83,12 +106,17 @@ var SiderMenu = function SiderMenu(props) {
+     style: style,
+     width: siderWidth,
+     theme: theme,
+-    className: siderClassName
+-  }, headerDom && React.createElement("div", {
++    className: siderClassName,
++    collapsedWidth: (
++      defaultTheme['menu-collapsed-width']
++        ? Number(defaultTheme['menu-collapsed-width'].split('px')[0])
++        : null
++    ),
++  }, layout == 'mixmenu' ? null : (headerDom && React.createElement("div", {
+     className: "ant-pro-sider-menu-logo",
+     onClick: onMenuHeaderClick,
+     id: "logo"
+-  }, headerDom), flatMenuKeys && React.createElement(BaseMenu, Object.assign({}, props, {
++  }, headerDom)), flatMenuKeys && React.createElement(BaseMenu, Object.assign({}, props, {
+     mode: "inline",
+     handleOpenChange: onOpenChange,
+     style: {
+@@ -109,7 +137,21 @@ var SiderMenu = function SiderMenu(props) {
+         key: index
+       }, node)
+     );
+-  }))));
++  }))), 
++  React.createElement('div', {
++    style: {
++      height: 44
++    }
++  }),
++  layout == 'mixmenu' && collapsedButtonRender && React.createElement('div', {
++    className: 'mix_collapsed_button_wrap',
++    onClick: toggle,
++    style: {
++      right: collapsed ? 0 : 7,
++      justifyContent: collapsed ? 'center' : 'right'
++    }
++  }, collapsedButtonRender(collapsed))
++  );
+ };
+ 
+ export default SiderMenu;
+\ No newline at end of file
+diff --git a/node_modules/@ant-design/pro-layout/es/SiderMenu/index.less b/node_modules/@ant-design/pro-layout/es/SiderMenu/index.less
+index 8de251d..ae6740d 100644
+--- a/node_modules/@ant-design/pro-layout/es/SiderMenu/index.less
++++ b/node_modules/@ant-design/pro-layout/es/SiderMenu/index.less
+@@ -1,4 +1,5 @@
+ @import '~antd/es/style/themes/default.less';
++@import '../../../../../config/theme/defaultTheme.less';
+ 
+ @pro-layout-sider-menu-prefix-cls: ~'@{ant-prefix}-pro-sider-menu';
+ 
+@@ -7,17 +8,19 @@
+ .@{pro-layout-sider-menu-prefix-cls} {
+   position: relative;
+   &-logo {
++    box-sizing: border-box;
+     position: relative;
+     padding: 0 (@menu-collapsed-width - 32px) / 2;
+     overflow: hidden;
+     background: @layout-sider-background;
+     cursor: pointer;
+     transition: all 0.3s;
++    height: @nav-header-height; //左侧logo wrap高度
+ 
+     > a {
+       display: flex;
+       align-items: center;
+-      height: 64px;
++      height: @nav-header-height;
+     }
+ 
+     img {
+@@ -42,12 +45,20 @@
+     min-height: 100%;
+     box-shadow: 2px 0 6px rgba(0, 21, 41, 0.35);
+     &.fix-sider-bar {
++      box-sizing: border-box;
+       position: fixed;
+       top: 0;
+       left: 0;
+       height: 100%;
+       overflow: auto;
+       box-shadow: 2px 0 8px 0 rgba(29, 35, 41, 0.05);
++      z-index: 1;
++
++      // 左侧隐藏滚动条
++      &::-webkit-scrollbar {
++        display: none;
++      }
++
+       > .ant-menu-root {
+         :not(.@{pro-layout-sider-menu-prefix-cls}-link-menu) {
+           height: ~'calc(100vh - @{nav-header-height})';
+@@ -78,6 +89,10 @@
+         border-right-color: transparent;
+       }
+     }
++    // mix模式
++    &.ant-pro-sider-menu-sider-mix {
++      padding-top: @nav-header-height;
++    }
+   }
+ 
+   &-icon {
+@@ -129,6 +144,17 @@
+   }
+ }
+ 
++//mix模式下的切换button
++.mix_collapsed_button_wrap{
++  position: absolute;
++  bottom: 0;
++  width: 23px;
++  height: 42px;
++  display: flex;
++  align-items: center;
++  // justify-content: right;
++}
++
+ @keyframes fade-in {
+   0% {
+     opacity: 0;

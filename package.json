@@ -1,0 +1,26 @@
+{
+  "name": "interhospital",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "gitdownload-all": "yarn && npm-run-all --serial gitdownload:*",
+    "gitdownload:main-app": "cd main_apps/micro-app-react && git clone https://code.bld365.com/internet-hospital/main-app.git ./",
+    "gitdownload:child-1": "cd child_apps/doctor-web && git clone https://code.bld365.com/internet-hospital/child-app-doctor.git ./",
+    "gitdownload:child-2": "cd child_apps/mall-web && git clone https://code.bld365.com/internet-hospital/child-app-mall.git ./",
+    "install-all": "yarn && npm-run-all --serial install:*",
+    "install:main-app": "cd main_apps/micro-app-react && yarn",
+    "install:child-1": "cd child_apps/doctor-web && yarn",
+    "install:child-2": "cd child_apps/mall-web && yarn",
+    "dev-all": "npm-run-all --parallel dev:*",
+    "dev:main-app": "cd main_apps/micro-app-react && npm run start:dev",
+    "dev:child-1": "cd child_apps/doctor-web && npm run serve",
+    "dev:child-2": "cd child_apps/mall-web && npm run start"
+  },
+  "author": "jiqishoubi",
+  "license": "ISC",
+  "dependencies": {
+    "npm-run-all": "^4.1.5",
+    "yarn": "^1.22.18"
+  }
+}

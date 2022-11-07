@@ -1,0 +1,56 @@
+@import url('~@/common/styles.less');
+
+.page_container {
+  padding: 0 15px;
+
+  .content_title {
+    .flexCenter;
+    font-size: 17px;
+    padding: 15px 0;
+    border-bottom: 1px solid #eeeeee;
+  }
+
+  .form {
+    padding: 10px 0;
+    .row {
+      .flex;
+      flex-wrap: wrap;
+      .item {
+        width: 20%;
+        .flex;
+        margin: 7px 0;
+
+        @labelWidth: 75px;
+        .label {
+          width: @labelWidth;
+          text-align: right;
+          &::after {
+            content: '：';
+          }
+        }
+
+        .input {
+          width: calc(100% - @labelWidth);
+          word-wrap: break-word;
+          word-break: break-all;
+          line-height: 21px;
+
+          .img_wrap {
+            .flex;
+            flex-wrap: wrap;
+            .img_box {
+              font-size: 0;
+              margin: 0 10px 10px 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.h5_webview {
+  border: 1px solid #999;
+  outline: none;
+  margin: 20px 0 20px 100px;
+}

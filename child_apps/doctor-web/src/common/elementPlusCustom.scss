@@ -1,0 +1,17 @@
+/*
+注：
+1、在main中，这个scss文件 要在ElementPlus引入之前引用，因为ElementPlus需要使用生成的light-x
+2、引入element-plus里的scss，前面要加上node_modules，// 根据命令行报错修改的
+*/
+
+/* just override what you need */
+@forward 'node_modules/element-plus/theme-chalk/src/common/var.scss' with (
+  $colors: (
+    'primary': (
+      'base': #1d7bff,
+      // 2、修改基础的颜色，这里不能使用单词，例如green，因为生成不了light-x，不知道为啥。。。
+    ),
+  )
+);
+
+@use 'node_modules/element-plus/theme-chalk/src/index.scss' as *;

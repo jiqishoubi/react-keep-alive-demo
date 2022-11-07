@@ -1,0 +1,17 @@
+.goodsName_wrap {
+  display: flex;
+  //   align-items: flex-end;
+  align-items: center;
+
+  @imgWidth: 60px;
+  .goodsImgBox {
+    width: @imgWidth;
+    height: @imgWidth;
+  }
+  .goodsName_text {
+    box-sizing: border-box;
+    width: calc(100% - @imgWidth);
+    padding-left: 12px;
+    text-align: left !important;
+  }
+}

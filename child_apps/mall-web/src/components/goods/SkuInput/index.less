@@ -1,0 +1,52 @@
+.flex {
+  display: flex;
+}
+
+.flexCenter {
+  align-items: center;
+  &:extend(.flex);
+}
+
+.flexBetween {
+  justify-content: space-between;
+  &:extend(.flex);
+}
+
+////
+.del_icon {
+  margin-left: 10px;
+  cursor: pointer;
+
+  &:hover {
+    color: red;
+  }
+}
+
+////
+.property_box {
+  box-sizing: border-box;
+  max-width: 650px;
+  border: 1px solid #f0f0f0;
+  .propertyName_title {
+    .flexCenter;
+    .flexBetween;
+    padding: 10px 15px;
+    background-color: #f0f0f0;
+    .propertyName_btn_wrap {
+      .flexCenter;
+    }
+  }
+  .propertyValue_wrap {
+    .flex;
+    flex-wrap: wrap;
+    padding: 10px 15px;
+
+    .propertyValue {
+      .flexCenter;
+      margin-right: 10px;
+    }
+  }
+  .propertyValue_wrap_empty_tip {
+    color: red;
+  }
+}

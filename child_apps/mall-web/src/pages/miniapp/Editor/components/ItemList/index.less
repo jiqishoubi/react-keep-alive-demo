@@ -1,0 +1,80 @@
+@import '~@/utils/utils.less';
+@import '../../../../../../config/theme/defaultTheme.less';
+
+@panelMarginTop: 20px;
+@panelH: @layout-header-height+ @panelMarginTop*2;
+
+.panel {
+  position: relative;
+  box-sizing: border-box;
+  width: 300px;
+  // height: calc(100vh - @panelH);
+  height: 713px;
+  margin: @panelMarginTop 10px;
+  overflow-y: auto;
+  box-shadow: 0 1px 4px rgba(1, 15, 27, 0.2);
+}
+
+@bgColor: #8d8d8d;
+
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  width: 100%;
+  height: 40px;
+  color: #fff;
+  background-color: @bgColor;
+  cursor: pointer;
+  user-select: none;
+  .flexCenter;
+  .flexJCenter;
+
+  &:hover {
+    .active;
+  }
+}
+
+// 内容
+@contentH: @layout-header-height*3+ @panelMarginTop*2;
+
+.content {
+  height: calc(100% - 40px);
+  margin-top: 40px;
+  // margin-bottom: 40px;
+  // height: calc(100% - 80px);
+  margin-bottom: 0;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.tab_wrap {
+  .flexCenter;
+  .flexAround;
+
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  overflow: hidden;
+  color: #fff;
+  background-color: @bgColor;
+}
+
+.active {
+  &::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    box-sizing: border-box;
+    border: 2px dashed #1b6ad1;
+    content: '';
+  }
+}
